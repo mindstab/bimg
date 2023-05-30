@@ -285,6 +285,7 @@ namespace bimg
 		, bool _hasMips
 		, uint16_t _numLayers
 		, TextureFormat::Enum _format
+		, uint8_t _numMips = 0
 		);
 
 	///
