@@ -219,6 +219,7 @@ namespace bimg
 			, uint16_t(dstWidth)
 			, uint16_t(1)
 			, 1
+			, 0
 			, true
 			, false
 			);
@@ -354,6 +355,7 @@ namespace bimg
 			, uint16_t(dstWidth)
 			, uint16_t(1)
 			, 1
+			, 0
 			, true
 			, false
 			);
@@ -401,7 +403,7 @@ namespace bimg
 		const uint32_t dstPitch = dstWidth*16;
 		const float texelSize   = 1.0f / float(dstWidth);
 
-		ImageContainer* output = imageAlloc(_allocator, TextureFormat::RGBA32F, uint16_t(dstWidth), uint16_t(dstWidth), 1, 1, true, false);
+		ImageContainer* output = imageAlloc(_allocator, TextureFormat::RGBA32F, uint16_t(dstWidth), uint16_t(dstWidth), 1, 1, 0, true, false);
 
 		for (uint8_t side = 0; side < 6; ++side)
 		{
@@ -1033,7 +1035,15 @@ namespace bimg
 			return NULL;
 		}
 
-		ImageContainer* output = imageAlloc(_allocator, _image.m_format, uint16_t(_image.m_width), uint16_t(_image.m_height), uint16_t(_image.m_depth), _image.m_numLayers, _image.m_cubeMap, true);
+		ImageContainer* output = imageAlloc(_allocator
+			, _image.m_format
+			, uint16_t(_image.m_width)
+			, uint16_t(_image.m_height)
+			, uint16_t(_image.m_depth)
+			, _image.m_numLayers
+			, 0
+			, _image.m_cubeMap
+			, true);
 
 		const uint32_t numMips   = output->m_numMips;
 		const uint32_t numLayers = output->m_numLayers;
@@ -1143,7 +1153,16 @@ namespace bimg
 			input = temp;
 		}
 
-		ImageContainer* output = imageAlloc(_allocator, TextureFormat::RGBA32F, uint16_t(input->m_width), uint16_t(input->m_width), 1, 1, true, true);
+		ImageContainer* output = imageAlloc(
+			  _allocator
+			, TextureFormat::RGBA32F
+			, uint16_t(input->m_width)
+			, uint16_t(input->m_width)
+			, 1
+			, 1
+			, 0
+			, true
+			, true);
 
 		for (uint8_t side = 0; side < 6; ++side)
 		{

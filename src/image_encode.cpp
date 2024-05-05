@@ -378,6 +378,7 @@ namespace bimg
 			, uint16_t(_input.m_height)
 			, uint16_t(_input.m_depth)
 			, _input.m_numLayers
+			, 0
 			, _input.m_cubeMap
 			, 1 < _input.m_numMips
 			);

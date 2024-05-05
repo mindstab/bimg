@@ -265,6 +265,7 @@ bimg::ImageContainer* convert(bx::AllocatorI* _allocator, const void* _inputData
 				, uint16_t(outputHeight)
 				, uint16_t(outputDepth)
 				, input->m_numLayers
+				, 0
 				, input->m_cubeMap
 				, false
 				);
@@ -372,6 +373,7 @@ bimg::ImageContainer* convert(bx::AllocatorI* _allocator, const void* _inputData
 			, uint16_t(input->m_height)
 			, uint16_t(input->m_depth)
 			, input->m_numLayers
+			, 0
 			, input->m_cubeMap
 			, _options.mips
 			);

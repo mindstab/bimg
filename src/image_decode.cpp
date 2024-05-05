@@ -237,6 +237,7 @@ namespace bimg
 					, uint16_t(height)
 					, 0
 					, 1
+					, 0
 					, false
 					, false
 					, copyData
@@ -623,6 +624,7 @@ namespace bimg
 				, uint16_t(height)
 				, 0
 				, 1
+				, 0
 				, false
 				, false
 				, data
@@ -682,6 +684,7 @@ namespace bimg
 			, uint16_t(height)
 			, 0
 			, 1
+			, 0
 			, false
 			, false
 			, data

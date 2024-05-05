@@ -477,6 +477,7 @@ namespace bimg
 		, uint16_t _height
 		, uint16_t _depth
 		, uint16_t _numLayers
+		, uint8_t _numMips
 		, bool _cubeMap
 		, bool _hasMips
 		, const void* _data = NULL

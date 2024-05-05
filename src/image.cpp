@@ -1271,6 +1271,7 @@ namespace bimg
 			, uint16_t(_input.m_depth)
 			, _input.m_numLayers
 			, _input.m_cubeMap
+			, 0
 			, _convertMips && 1 < _input.m_numMips
 			);
 
@@ -1336,6 +1337,7 @@ namespace bimg
 			, uint16_t(imageContainer.m_height)
 			, uint16_t(imageContainer.m_depth)
 			, imageContainer.m_numLayers
+			, imageContainer.m_numMips
 			, imageContainer.m_cubeMap
 			, 1 < imageContainer.m_numMips
 			);
@@ -3283,7 +3285,7 @@ namespace bimg
 		}
 	}
 
-	ImageContainer* imageAlloc(bx::AllocatorI* _allocator, TextureFormat::Enum _format, uint16_t _width, uint16_t _height, uint16_t _depth, uint16_t _numLayers, bool _cubeMap, bool _hasMips, const void* _data)
+	ImageContainer* imageAlloc(bx::AllocatorI* _allocator, TextureFormat::Enum _format, uint16_t _width, uint16_t _height, uint16_t _depth, uint16_t _numLayers, uint8_t _numMips, bool _cubeMap, bool _hasMips, const void* _data)
 	{
 		const ImageBlockInfo& blockInfo = getBlockInfo(_format);
 		const uint16_t blockWidth  = blockInfo.blockWidth;
@@ -3296,8 +3298,9 @@ namespace bimg
 		_depth     = bx::max<uint16_t>(1, _depth);
 		_numLayers = bx::max<uint16_t>(1, _numLayers);
 
-		const uint8_t numMips = _hasMips ? imageGetNumMips(_format, _width, _height, _depth) : 1;
-		uint32_t size = imageGetSize(NULL, _width, _height, _depth, _cubeMap, _hasMips, _numLayers, _format);
+		const uint8_t numMips =
+                    _hasMips ? (_numMips > 0 ? _numMips : imageGetNumMips(_format, _width, _height, _depth)) : 1;
+		uint32_t size = imageGetSize(NULL, _width, _height, _depth, _cubeMap, _hasMips, _numLayers, _format, numMips);
 
 		ImageContainer* imageContainer = (ImageContainer*)bx::alignedAlloc(_allocator, size + bx::alignUp(sizeof(ImageContainer), 16), 16);
 
@@ -4632,6 +4635,7 @@ namespace bimg
 					, uint16_t(_height)
 					, uint16_t(1)
 					, 1
+					, 0
 					, false
 					, false
 					);
